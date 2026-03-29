@@ -1,8 +1,5 @@
-fastapi
-uvicorn
+streamlit
 sentence-transformers
 numpy
-requests
-scikit-learn
 faiss-cpu
 torch --index-url https://download.pytorch.org/whl/cpu
