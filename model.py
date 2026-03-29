@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import faiss
 
-model = None  # don't load immediately
+model = None
 
 def get_model():
     global model
@@ -10,8 +10,6 @@ def get_model():
         model = SentenceTransformer('all-MiniLM-L6-v2')
     return model
 
-
-# Create index
 def create_index(data):
     model = get_model()
     embeddings = model.encode(data)
@@ -19,8 +17,6 @@ def create_index(data):
     index.add(np.array(embeddings))
     return index
 
-
-# Search function
 def search(query, data, index):
     model = get_model()
     q_emb = model.encode([query])
