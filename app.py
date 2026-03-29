@@ -1,14 +1,19 @@
 import streamlit as st
-import requests
+from model import create_index, search
 
 st.title("🔍 Semantic Search Engine")
+
+# Load data
+with open("data.txt", "r") as f:
+    data = f.read().split("\n")
+
+# Create index
+index = create_index(data)
 
 query = st.text_input("Enter your query")
 
 if st.button("Search"):
     if query:
-        res = requests.post("http://127.0.0.1:8000/query", json={"query": query})
-        data = res.json()
-        
+        result = search(query, data, index)
         st.subheader("Result:")
-        st.write(data["result"])
+        st.write(result)
